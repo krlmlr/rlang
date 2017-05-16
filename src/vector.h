@@ -91,7 +91,13 @@ SEXP namespace_rlang_sym(SEXP sym) {
   static SEXP rlang_sym = NULL;
   if (!rlang_sym)
     rlang_sym = Rf_install("rlang");
-  return(Rf_lang3(R_DoubleColonSymbol, rlang_sym, sym));
+
+  // R_DoubleColonSymbol not available in R 3.1.0
+  static SEXP double_colon_sym = NULL;
+  if (!double_colon_sym)
+    double_colon_sym = Rf_install("::");
+
+  return(Rf_lang3(double_colon_sym, rlang_sym, sym));
 }
 
 SEXP vec_coercer_sym(SEXP dest) {
