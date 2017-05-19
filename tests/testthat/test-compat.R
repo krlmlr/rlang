@@ -102,9 +102,9 @@ test_that("port_back() assigns conditionally", {
 
   env <- env()
   port_back(chr(), env)
-  expect_named(env, chr())
+  expect_identical(names(env), chr())
 
   port_back(c("inactive", "active"), env)
-  expect_named(env, "active")
+  expect_identical(names(env), "active")
   expect_identical(env$active, backports[["100.0"]]$active)
 })
