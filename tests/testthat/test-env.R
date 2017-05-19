@@ -165,16 +165,16 @@ test_that("scoped_env() deals with empty environment", {
 })
 
 test_that("env() doesn't partial match on env_bind()'s .env", {
-  expect_equal(env_names(env(.data = 1, . = 2)), c(".", ".data"))
+  expect_true(all(env_has(env(.data = 1, . = 2), c(".data", "."))))
 })
 
 test_that("new_environment() creates a child of the empty env", {
   env <- new_environment(list(a = 1, b = 2))
-  expect_equal(env_names(env), c("a", "b"))
+  expect_true(all(env_has(env, c("a", "b"))))
   expect_identical(env_parent(env), empty_env())
 })
 
 test_that("new_environment() accepts empty vectors", {
-  expect_equal(env_names(new_environment()), chr())
-  expect_equal(env_names(new_environment(dbl())), chr())
+  expect_identical(names(new_environment()), chr())
+  expect_identical(names(new_environment(dbl())), chr())
 })

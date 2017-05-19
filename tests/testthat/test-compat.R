@@ -81,3 +81,30 @@ test_that("compat_lazy() handles bare formulas", {
   expect_identical(compat_lazy(~foo), quo(foo))
   expect_identical(compat_lazy_dots(~foo), named_list(quo(foo)))
 })
+
+test_that("trimws() trims", {
+  x <- "  foo.  "
+  expect_identical(trimws(x), "foo.")
+  expect_identical(trimws(x, "l"), "foo.  ")
+  expect_identical(trimws(x, "r"), "  foo.")
+})
+
+test_that("port_back() assigns conditionally", {
+  backports <- list(
+    `0.0` = list(inactive = function() "inactive"),
+    `100.0` = list(active = function() "active")
+  )
+
+  # Overscope test backports
+  port_back <- set_env(port_back)
+  port_back_version <- set_env(port_back_version)
+  env_bury(port_back_version, backports = backports)
+
+  env <- env()
+  port_back(chr(), env)
+  expect_identical(names(env), chr())
+
+  port_back(c("inactive", "active"), env)
+  expect_identical(names(env), "active")
+  expect_identical(env$active, backports[["100.0"]]$active)
+})
