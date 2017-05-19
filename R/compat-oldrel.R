@@ -60,10 +60,14 @@ backports_3.2.0 <- list(
 
   names = function(x) {
     if (is.environment(x)) {
-      ls(x, all.names = TRUE)
+      return(ls(x, all.names = TRUE))
     } else {
-      base::names(x)
+      return(base::names(x))
     }
+
+    # So R CMD check sees a generic, since we declare a names() method
+    # for dictionary objects
+    UseMethod("names")
   },
 
   trimws = function(x, which = c("both", "left", "right")) {
