@@ -163,7 +163,7 @@ SEXP make_formula1(SEXP rhs, SEXP env) {
 }
 
 SEXP rlang_fun(SEXP sym) {
-  SEXP prefixed_sym = PROTECT(Rf_lang3(Rf_install("::"), Rf_install("rlang"), sym));
+  SEXP prefixed_sym = PROTECT(Rf_lang3(Rf_install(":::"), Rf_install("rlang"), sym));
   SEXP fun = Rf_eval(prefixed_sym, R_BaseEnv);
   UNPROTECT(1);
   return fun;
