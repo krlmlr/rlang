@@ -149,7 +149,7 @@ copy_lang_name <- function(f, x) {
 #' @export
 #' @rdname f_rhs
 f_env <- function(f) {
-  if(!is_formula(f)) {
+  if (!is_formula(f)) {
     abort("`f` must be a formula")
   }
   attr(f, ".Environment")

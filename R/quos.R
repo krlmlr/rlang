@@ -65,7 +65,7 @@
 #' dots <- dots_definitions(var = foo(baz) := bar(baz))
 #' dots$defs
 quos <- function(..., .named = FALSE,
-                 .ignore_empty = c("trailing", "none", "all")) {
+  .ignore_empty = c("trailing", "none", "all")) {
   dots <- dots_enquose(...)
   dots <- dots_clean_empty(dots, quo_is_missing, .ignore_empty)
 
@@ -95,10 +95,10 @@ quo_names_width <- function(named) {
   if (is_true(named)) {
     60L
   } else if (is_scalar_integerish(named)) {
-    named
-  } else {
-    abort("`.named` must be a scalar logical or a numeric")
-  }
+      named
+    } else {
+      abort("`.named` must be a scalar logical or a numeric")
+    }
 }
 
 #' Ensure that list of expressions are all named

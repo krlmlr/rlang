@@ -79,8 +79,8 @@ lang <- function(.fn, ..., .ns = NULL) {
     }
     .fn <- sym(.fn)
   } else if (!is_callable(.fn)) {
-    abort("Can't create call to non-callable object")
-  }
+      abort("Can't create call to non-callable object")
+    }
 
   if (!is_null(.ns)) {
     .fn <- new_language(sym_namespace, pairlist(sym(.ns), .fn))
@@ -209,8 +209,8 @@ is_lang <- function(x, name = NULL, n = NULL, ns = NULL) {
     if (identical(ns, "") && is_namespaced_lang(x, private = FALSE)) {
       return(FALSE)
     } else if (!is_namespaced_lang(x, ns, private = FALSE)) {
-      return(FALSE)
-    }
+        return(FALSE)
+      }
   }
 
   x <- lang_unnamespace(x)
@@ -391,8 +391,8 @@ lang_fn <- function(lang) {
   switch_lang(expr,
     recursive = abort("`lang` does not lang a named or inlined function"),
     inlined = node_car(expr),
-    named = ,
-    namespaced = ,
+    named =,
+    namespaced =,
     eval_bare(node_car(expr), env)
   )
 }
@@ -535,9 +535,9 @@ is_qualified_symbol <- function(x) {
 
   qualifier <- node_car(x)
   identical(qualifier, sym_namespace) ||
-    identical(qualifier, sym_namespace2) ||
-    identical(qualifier, sym_dollar) ||
-    identical(qualifier, sym_at)
+  identical(qualifier, sym_namespace2) ||
+  identical(qualifier, sym_dollar) ||
+  identical(qualifier, sym_at)
 }
 is_namespaced_symbol <- function(x, ns = NULL, private = NULL) {
   if (typeof(x) != "language") return(FALSE)
@@ -547,8 +547,8 @@ is_namespaced_symbol <- function(x, ns = NULL, private = NULL) {
   if (is_null(private)) {
     identical(head, sym_namespace) || identical(head, sym_namespace2)
   } else if (private) {
-    identical(head, sym_namespace2)
-  } else {
-    identical(head, sym_namespace)
-  }
+      identical(head, sym_namespace2)
+    } else {
+      identical(head, sym_namespace)
+    }
 }

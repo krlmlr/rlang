@@ -219,14 +219,14 @@ is_condition <- function(x) {
 #' # execution should not continue after signalling a critical
 #' # condition.
 cnd_signal <- function(.cnd, ..., .msg = NULL, .call = NULL,
-                       .mufflable = TRUE) {
+  .mufflable = TRUE) {
   cnd <- cnd_update(.cnd, ..., .msg = .msg, .call = cnd_call(.call), .show_call = .call)
   invisible(.Call(rlang_cnd_signal, cnd, .mufflable))
 }
 #' @rdname cnd_signal
 #' @export
 cnd_abort <- function(.cnd, ..., .msg = NULL, .call = NULL,
-                      .mufflable = FALSE) {
+  .mufflable = FALSE) {
   cnd <- cnd_update(.cnd, ..., .msg = .msg, .call = cnd_call(.call), .show_call = .call)
   invisible(.Call(rlang_cnd_signal_error, cnd, .mufflable))
 }
@@ -235,8 +235,8 @@ cnd_call <- function(call) {
   if (is_scalar_logical(call) || is_null(call)) {
     call <- 1
   } else if (!is_scalar_integerish(call)) {
-    stop("`call` must be a scalar boolean or number", call. = FALSE)
-  }
+      stop("`call` must be a scalar boolean or number", call. = FALSE)
+    }
 
   caller_frame(call + 1)$expr
 }
@@ -256,12 +256,12 @@ cnd_update <- function(.cnd, ..., .msg, .call, .show_call) {
   if (is_null(.show_call)) {
     .cnd$call <- .cnd$.call
   } else if (is_true(.show_call) || is_scalar_integerish(.show_call)) {
-    .cnd$call <- .call
-  } else if (is_false(.show_call)) {
-    .cnd$call <- NULL
-  } else {
-    stop("Internal error: unexpected `.show_call`", call. = FALSE)
-  }
+      .cnd$call <- .call
+    } else if (is_false(.show_call)) {
+        .cnd$call <- NULL
+      } else {
+        stop("Internal error: unexpected `.show_call`", call. = FALSE)
+      }
 
   # Record actual call in `.call` in all cases
   .cnd$.call <- .call

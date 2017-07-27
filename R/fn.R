@@ -280,7 +280,7 @@ is_primitive_lazy <- function(x) {
 #' fn_env(fn) <- other_env
 #' identical(fn_env(fn), other_env)
 fn_env <- function(fn) {
-  if(!is_function(fn)) {
+  if (!is_function(fn)) {
     abort("`fn` is not a function", "type")
   }
   environment(fn)
@@ -289,7 +289,7 @@ fn_env <- function(fn) {
 #' @export
 #' @rdname fn_env
 `fn_env<-` <- function(x, value) {
-  if(!is_function(x)) {
+  if (!is_function(x)) {
     abort("`fn` is not a function", "type")
   }
   environment(x) <- value
@@ -333,7 +333,7 @@ fn_env <- function(fn) {
 #' as_closure(`~`)
 as_function <- function(x, env = caller_env()) {
   coerce_type(x, friendly_type("function"),
-    primitive = ,
+    primitive =,
     closure = {
       x
     },
@@ -346,8 +346,7 @@ as_function <- function(x, env = caller_env()) {
     },
     string = {
       get(x, envir = env, mode = "function")
-    }
-  )
+  }  )
 }
 #' @rdname as_function
 #' @export
@@ -355,7 +354,7 @@ as_closure <- function(x, env = caller_env()) {
   x <- as_function(x, env = env)
   coerce_type(x, "a closure",
     closure =
-      x,
+    x,
     primitive = {
       fn_name <- prim_name(x)
 
@@ -379,27 +378,26 @@ as_closure <- function(x, env = caller_env()) {
 
       prim_call <- lang(fn_name, splice(args))
       new_function(fmls, prim_call, base_env())
-    }
-  )
+  }  )
 }
 
 op_as_closure <- function(prim_nm) {
   switch(prim_nm,
-    `<-` = ,
-    `<<-` = ,
+    `<-` =,
+    `<<-` =,
     `=` = function(.x, .y) {
       op <- sym(prim_nm)
       expr <- expr(UQ(op)(UQ(enexpr(.x)), UQ(enexpr(.y))))
       eval_bare(expr, caller_env())
     },
-    `@` = ,
+    `@` =,
     `$` = function(.x, .i) {
       op <- sym(prim_nm)
       expr <- expr(UQ(op)(.x, `!!`(enexpr(.i))))
       eval_bare(expr)
     },
-    `[[<-` = ,
-    `@<-` = ,
+    `[[<-` =,
+    `@<-` =,
     `$<-` = function(.x, .i, .value) {
       op <- sym(prim_nm)
       expr <- expr(UQ(op)(UQ(enexpr(.x)), UQ(enexpr(.i)), UQ(enexpr(.value))))
@@ -443,16 +441,15 @@ op_as_closure <- function(prim_nm) {
     },
 
     # Unsupported primitives
-    `break` = ,
-    `for` = ,
-    `function` = ,
-    `if` = ,
-    `next` = ,
-    `repeat` = ,
-    `return` = ,
+    `break` =,
+    `for` =,
+    `function` =,
+    `if` =,
+    `next` =,
+    `repeat` =,
+    `return` =,
     `while` = {
       nm <- chr_quoted(prim_nm)
       abort(paste0("Can't coerce the primitive function ", nm, " to a closure"))
-    }
-  )
+  }  )
 }

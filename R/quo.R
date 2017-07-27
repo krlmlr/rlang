@@ -207,12 +207,12 @@ forward_quosure <- function(expr, env) {
   if (is_quosure(expr)) {
     expr
   } else if (is_definition(expr)) {
-    as_quosureish(expr, env)
-  } else if (is_symbolic(expr)) {
-    new_quosure(expr, env)
-  } else {
-    new_quosure(expr, empty_env())
-  }
+      as_quosureish(expr, env)
+    } else if (is_symbolic(expr)) {
+        new_quosure(expr, env)
+      } else {
+        new_quosure(expr, empty_env())
+      }
 }
 
 #' @export
@@ -271,8 +271,8 @@ is_quosureish <- function(x, scoped = NULL) {
 }
 is_one_sided <- function(x, lang_sym = sym_tilde) {
   typeof(x) == "language" &&
-    identical(node_car(x), lang_sym) &&
-    is_null(node_cadr(node_cdr(x)))
+  identical(node_car(x), lang_sym) &&
+  is_null(node_cadr(node_cdr(x)))
 }
 
 #' Coerce object to quosure
@@ -331,12 +331,12 @@ as_quosure <- function(x, env = caller_env()) {
   if (is_quosure(x)) {
     x
   } else if (is_bare_formula(x)) {
-    new_quosure(f_rhs(x), f_env(x) %||% env)
-  } else if (is_symbolic(x)) {
-    new_quosure(x, env)
-  } else {
-    new_quosure(x, empty_env())
-  }
+      new_quosure(f_rhs(x), f_env(x) %||% env)
+    } else if (is_symbolic(x)) {
+        new_quosure(x, env)
+      } else {
+        new_quosure(x, empty_env())
+      }
 }
 #' @rdname as_quosure
 #' @export
@@ -347,10 +347,10 @@ as_quosureish <- function(x, env = caller_env()) {
     }
     x
   } else if (is_frame(x)) {
-    new_quosure(x$expr, sys_frame(x$caller_pos))
-  } else {
-    new_quosure(get_expr(x), get_env(x, env))
-  }
+      new_quosure(x$expr, sys_frame(x$caller_pos))
+    } else {
+      new_quosure(get_expr(x), get_env(x, env))
+    }
 }
 
 #' Is a quosure quoting a symbolic, missing or NULL object?
@@ -486,12 +486,11 @@ quo_splice <- function(x, parent = NULL, warn = FALSE) {
       }
     },
     pairlist = {
-      while(!is_null(x)) {
+      while (!is_null(x)) {
         quo_splice(node_car(x), x, warn = warn)
         x <- node_cdr(x)
       }
-    }
-  )
+  }  )
 
   x
 }

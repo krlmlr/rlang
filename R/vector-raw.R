@@ -3,10 +3,10 @@ new_bytes <- function(x) {
   if (is_integerish(x)) {
     as.raw(x)
   } else if (is_raw(x)) {
-    x
-  } else {
-    abort("input should be integerish")
-  }
+      x
+    } else {
+      abort("input should be integerish")
+    }
 }
 
 #' Coerce to a raw vector

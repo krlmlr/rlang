@@ -123,7 +123,7 @@ as_integer <- function(x) {
 #' @export
 as_double <- function(x) {
   coerce_type_vec(x, friendly_type("double"),
-    logical = ,
+    logical =,
     integer = as_base_type(x, as.double),
     double = set_attrs(x, NULL)
   )
@@ -132,8 +132,8 @@ as_double <- function(x) {
 #' @export
 as_complex <- function(x) {
   coerce_type_vec(x, friendly_type("complex"),
-    logical = ,
-    integer = ,
+    logical =,
+    integer =,
     double = as_base_type(x, as.complex),
     complex = set_attrs(x, NULL)
   )
@@ -142,7 +142,7 @@ as_complex <- function(x) {
 #' @export
 as_character <- function(x, encoding = NULL) {
   coerce_type_vec(x, friendly_type("character"),
-    string = ,
+    string =,
     character = set_chr_encoding(set_attrs(x, NULL), encoding)
   )
 }
@@ -175,12 +175,12 @@ env_as_list <- function(x) {
 }
 vec_as_list <- function(x) {
   coerce_type_vec(x, friendly_type("list"),
-    logical = ,
-    integer = ,
-    double = ,
-    string = ,
-    character = ,
-    complex = ,
+    logical =,
+    integer =,
+    double =,
+    string =,
+    character =,
+    complex =,
     raw = as_base_type(x, as.list),
     list = set_attrs(x, NULL)
   )

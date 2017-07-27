@@ -99,13 +99,12 @@ dots_clean_empty <- function(dots, is_empty, ignore_empty) {
     which <- match.arg(ignore_empty, c("trailing", "none", "all"))
     switch(which,
       trailing =
-        if (is_empty(dots[[n_dots]])) {
-          dots[[n_dots]] <- NULL
-        },
+      if (is_empty(dots[[n_dots]])) {
+        dots[[n_dots]] <- NULL
+      },
       all = {
         dots <- discard(dots, is_empty)
-      }
-    )
+    }    )
   }
 
   dots
@@ -261,8 +260,8 @@ dot_interp_lhs <- function(name, dot) {
   if (is_symbol(lhs)) {
     lhs <- as_string(lhs)
   } else if (!is_string(lhs)) {
-    abort("LHS must be a name or string")
-  }
+      abort("LHS must be a name or string")
+    }
 
   dot <- list(expr = f_rhs(dot$expr), env = dot$env)
   list(name = lhs, dot = dot)

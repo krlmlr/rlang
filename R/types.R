@@ -353,12 +353,12 @@ type_of <- function(x) {
       "formula"
     }
   } else if (type == "character") {
-    if (length(x) == 1) "string" else "character"
-  } else if (type %in% c("builtin", "special")) {
-    "primitive"
-  } else {
-    type
-  }
+      if (length(x) == 1) "string" else "character"
+    } else if (type %in% c("builtin", "special")) {
+        "primitive"
+      } else {
+        type
+      }
 }
 
 #' Dispatch on base types
@@ -487,7 +487,7 @@ friendly_type_of <- function(type) {
   switch(type,
     logical = "a logical vector",
     integer = "an integer vector",
-    numeric = ,
+    numeric =,
     double = "a double vector",
     complex = "a complex vector",
     character = "a character vector",
@@ -501,7 +501,7 @@ friendly_type_of <- function(type) {
     weakref = "a weak reference",
     S4 = "an S4 object",
 
-    name = ,
+    name =,
     symbol = "a symbol",
     language = "a call",
     pairlist = "a pairlist node",
@@ -514,8 +514,8 @@ friendly_type_of <- function(type) {
     any = "an internal `any` object",
     bytecode = "an internal bytecode object",
 
-    primitive = ,
-    builtin = ,
+    primitive =,
+    builtin =,
     special = "a primitive function",
     closure = "a function"
   )
@@ -533,7 +533,7 @@ friendly_lang_type_of <- function(type) {
 friendly_expr_type_of <- function(type) {
   switch(type,
     NULL = "NULL",
-    name = ,
+    name =,
     symbol = "a symbol",
     language = "a call",
     pairlist = "a pairlist node",
@@ -625,14 +625,14 @@ lang_type_of <- function(x) {
   if (type == "symbol") {
     "named"
   } else if (is_namespaced_symbol(node_car(x))) {
-    "namespaced"
-  } else if (type == "language") {
-    "recursive"
-  } else if (type %in% c("closure", "builtin", "special")) {
-    "inlined"
-  } else {
-    abort("corrupt language object")
-  }
+      "namespaced"
+    } else if (type == "language") {
+        "recursive"
+      } else if (type %in% c("closure", "builtin", "special")) {
+          "inlined"
+        } else {
+          abort("corrupt language object")
+        }
 }
 
 #' Is an object copyable?
@@ -668,13 +668,13 @@ lang_type_of <- function(x) {
 #' quote(foo)
 is_copyable <- function(x) {
   switch_type(x,
-    NULL = ,
-    char = ,
-    symbol = ,
-    primitive = ,
-    environment = ,
+    NULL =,
+    char =,
+    symbol =,
+    primitive =,
+    environment =,
     pointer =
-      FALSE,
+    FALSE,
     TRUE
   )
 }

@@ -34,10 +34,10 @@ string <- function(x, encoding = NULL) {
   if (is_integerish(x)) {
     x <- rawToChar(as.raw(x))
   } else if (is_raw(x)) {
-    x <- rawToChar(x)
-  } else if (!is_string(x)) {
-    abort("`x` must be a string or raw vector")
-  }
+      x <- rawToChar(x)
+    } else if (!is_string(x)) {
+        abort("`x` must be a string or raw vector")
+      }
 
   set_chr_encoding(x, encoding)
 }
@@ -99,7 +99,7 @@ as_native_character <- function(x) {
 #' @export
 as_utf8_string <- function(x) {
   coerce_type(x, "an UTF-8 string",
-    symbol = ,
+    symbol =,
     string = enc2utf8(as_string(x))
   )
 }
@@ -107,7 +107,7 @@ as_utf8_string <- function(x) {
 #' @export
 as_native_string <- function(x) {
   coerce_type(x, "a natively encoded string",
-    symbol = ,
+    symbol =,
     string = enc2native(as_string(x))
   )
 }

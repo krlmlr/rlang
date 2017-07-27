@@ -189,16 +189,15 @@ as_env <- function(x, parent = NULL) {
       }
       pkg_env(x)
     },
-    logical = ,
-    integer = ,
-    double = ,
-    complex = ,
-    character = ,
-    raw = ,
+    logical =,
+    integer =,
+    double =,
+    complex =,
+    character =,
+    raw =,
     list = {
       as_env_(x, parent)
-    }
-  )
+  }  )
 }
 as_env_ <- function(x, parent = NULL) {
   stopifnot(is_dictionaryish(x))
@@ -266,7 +265,7 @@ env_tail <- function(env = caller_env()) {
   env_ <- get_env(env)
   next_env <- parent.env(env_)
 
-  while(!is_empty_env(next_env)) {
+  while (!is_empty_env(next_env)) {
     env_ <- next_env
     next_env <- parent.env(next_env)
   }
@@ -279,7 +278,7 @@ env_parents <- function(env = caller_env()) {
   out <- list_len(env_depth(env))
 
   i <- 1L
-  while(!is_empty_env(env)) {
+  while (!is_empty_env(env)) {
     env <- env_parent(env)
     out[[i]] <- env
     i <- i + 1L
@@ -306,7 +305,7 @@ env_depth <- function(env) {
   env_ <- get_env(env)
 
   n <- 0L
-  while(!is_empty_env(env_)) {
+  while (!is_empty_env(env_)) {
     env_ <- env_parent(env_)
     n <- n + 1L
   }
@@ -369,7 +368,7 @@ is_empty_env <- function(env) {
 get_env <- function(env = caller_env(), default = NULL) {
   out <- switch_type(env,
     environment = env,
-    definition = ,
+    definition =,
     formula = attr(env, ".Environment"),
     primitive = base_env(),
     closure = environment(env),
@@ -412,8 +411,8 @@ get_env <- function(env = caller_env(), default = NULL) {
 #' identical(get_env(fn), other_env)
 set_env <- function(env, new_env = caller_env()) {
   switch_type(env,
-    definition = ,
-    formula = ,
+    definition =,
+    formula =,
     closure = {
       environment(env) <- get_env(new_env)
       env
@@ -692,7 +691,7 @@ env_unbind <- function(env = caller_env(), nms, inherit = FALSE) {
   env_ <- get_env(env)
 
   if (inherit) {
-    while(any(env_has(env_, nms, inherit = TRUE))) {
+    while (any(env_has(env_, nms, inherit = TRUE))) {
       rm(list = nms, envir = env, inherits = TRUE)
     }
   } else {
@@ -771,7 +770,7 @@ env_get <- function(env = caller_env(), nm, inherit = FALSE) {
 #' @rdname env_get
 #' @export
 env_set <- function(env = caller_env(), nm, value,
-                    inherit = FALSE, create = NULL) {
+  inherit = FALSE, create = NULL) {
   stopifnot(is_string(nm))
   env_ <- get_env(env)
 
@@ -784,10 +783,10 @@ env_set <- function(env = caller_env(), nm, value,
   if (inherit) {
     scope_set(env, nm, value, create)
   } else if (create || env_has(env_, nm)) {
-    assign(nm, value, envir = env_)
-  } else {
-    abort(paste0("Can't find existing binding in `env` for \"", nm, "\""))
-  }
+      assign(nm, value, envir = env_)
+    } else {
+      abort(paste0("Can't find existing binding in `env` for \"", nm, "\""))
+    }
 
   env
 }
@@ -795,7 +794,7 @@ scope_set <- function(env, nm, value, create) {
   env_ <- get_env(env)
   cur <- env_
 
-  while(!env_has(cur, nm) && !is_empty_env(cur)) {
+  while (!env_has(cur, nm) && !is_empty_env(cur)) {
     cur <- env_parent(cur)
   }
 
@@ -880,7 +879,7 @@ env_inherits <- function(env, ancestor) {
   env <- get_env(env)
   stopifnot(is_env(ancestor) && is_env(env))
 
-  while(!is_empty_env(env_parent(env))) {
+  while (!is_empty_env(env_parent(env))) {
     env <- env_parent(env)
     if (is_reference(env, ancestor)) {
       return(TRUE)
@@ -1039,15 +1038,15 @@ ns_env <- function(pkg = NULL) {
     if (!isNamespace(bottom)) abort("not in a namespace")
     bottom
   } else if (is_function(pkg)) {
-    env <- env_parent(pkg)
-    if (isNamespace(env)) {
-      env
+      env <- env_parent(pkg)
+      if (isNamespace(env)) {
+        env
+      } else {
+        NULL
+      }
     } else {
-      NULL
+      asNamespace(pkg)
     }
-  } else {
-    asNamespace(pkg)
-  }
 }
 #' @rdname ns_env
 #' @export
@@ -1060,8 +1059,8 @@ ns_env_name <- function(pkg = NULL) {
   if (is_null(pkg)) {
     pkg <- with_env(caller_env(), ns_env())
   } else if (is_function(pkg)) {
-    pkg <- get_env(pkg)
-  }
+      pkg <- get_env(pkg)
+    }
   unname(getNamespaceName(pkg))
 }
 
@@ -1085,14 +1084,14 @@ env_type <- function(env) {
   if (is_reference(env, global_env())) {
     "global"
   } else if (is_reference(env, empty_env())) {
-    "empty"
-  } else if (is_reference(env, base_env())) {
-    "base"
-  } else if (is_frame_env(env)) {
-    "frame"
-  } else {
-    "local"
-  }
+      "empty"
+    } else if (is_reference(env, base_env())) {
+        "base"
+      } else if (is_frame_env(env)) {
+          "frame"
+        } else {
+          "local"
+        }
 }
 friendly_env_type <- function(type) {
   switch(type,

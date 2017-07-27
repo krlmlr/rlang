@@ -171,7 +171,7 @@ locally <- function(expr) {
 #' # the argument prefix:
 #' invoke(call_inspect, mtcars, .bury = c("inspect!", "col"))
 invoke <- function(.fn, .args = list(), ...,
-                   .env = caller_env(), .bury = c(".fn", "")) {
+  .env = caller_env(), .bury = c(".fn", "")) {
   args <- c(.args, list(...))
 
   if (is_null(.bury) || !length(args)) {

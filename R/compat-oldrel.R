@@ -8,7 +8,6 @@
 # their way to the next R version) -----------------------------------
 
 if (TRUE || utils::packageVersion("base") < "3.4.0") {
-
   captureArg <- function(x, strict = TRUE) {
     caller_env <- parent.frame()
 
@@ -31,14 +30,12 @@ if (TRUE || utils::packageVersion("base") < "3.4.0") {
 
     .Call(rlang_capturedots, NULL, NULL, pairlist(caller_env, strict), get_env())
   }
-
 }
 
 
 # R 3.2.0 ------------------------------------------------------------
 
 if (utils::packageVersion("base") < "3.2.0") {
-
   dir_exists <- function(path) {
     !identical(path, "") && file.exists(paste0(path, .Platform$file.sep))
   }
@@ -53,7 +50,6 @@ if (utils::packageVersion("base") < "3.2.0") {
       base::names(x)
     }
   }
-
 }
 
 # nocov end

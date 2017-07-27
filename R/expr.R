@@ -232,20 +232,20 @@ expr_label <- function(expr) {
   if (is.character(expr)) {
     encodeString(expr, quote = '"')
   } else if (is.atomic(expr)) {
-    format(expr)
-  } else if (is.name(expr)) {
-    paste0("`", as.character(expr), "`")
-  } else {
-    chr <- deparse_one(expr)
-    paste0("`", chr, "`")
-  }
+      format(expr)
+    } else if (is.name(expr)) {
+        paste0("`", as.character(expr), "`")
+      } else {
+        chr <- deparse_one(expr)
+        paste0("`", chr, "`")
+      }
 }
 #' @rdname expr_label
 #' @export
 expr_name <- function(expr) {
   switch_type(expr,
     symbol = as_string(expr),
-    quosure = ,
+    quosure =,
     language = {
       name <- deparse_one(expr)
       name <- gsub("\n.*$", "...", name)
@@ -255,13 +255,12 @@ expr_name <- function(expr) {
       # So 1L is translated to "1" and not "1L"
       as.character(expr)
     } else if (length(expr) == 1) {
-      name <- expr_text(expr)
-      name <- gsub("\n.*$", "...", name)
-      name
-    } else {
-      abort("`expr` must quote a symbol, scalar, or call")
-    }
-  )
+        name <- expr_text(expr)
+        name <- gsub("\n.*$", "...", name)
+        name
+      } else {
+        abort("`expr` must quote a symbol, scalar, or call")
+      }  )
 }
 #' @rdname expr_label
 #' @export
@@ -328,10 +327,10 @@ get_expr <- function(x, default = x) {
   if (is_quosureish(x)) {
     f_rhs(x)
   } else if (inherits(x, "frame")) {
-    x$expr
-  } else {
-    default
-  }
+      x$expr
+    } else {
+      default
+    }
 }
 
 expr_type_of <- function(x) {

@@ -165,17 +165,17 @@ ctxt_frame <- function(n = 1) {
   if (pos < 0L) {
     stop("not that many frames on the stack", call. = FALSE)
   } else if (pos == 0L) {
-    global_frame()
-  } else {
-    new_frame(list(
-      pos = pos,
-      caller_pos = sys.parent(n + 1),
-      expr = sys.call(-n),
-      env = sys.frame(-n),
-      fn = sys.function(-n),
-      fn_name = lang_name(sys.call(-n))
-    ))
-  }
+      global_frame()
+    } else {
+      new_frame(list(
+        pos = pos,
+        caller_pos = sys.parent(n + 1),
+        expr = sys.call(-n),
+        env = sys.frame(-n),
+        fn = sys.function(-n),
+        fn_name = lang_name(sys.call(-n))
+      ))
+    }
 }
 
 # Positions of frames in the call stack up to `n`
@@ -236,7 +236,6 @@ trail_next <- function(callers, i, clean) {
       callers <- callers[-special_eval_pos]
       i <- i - 1L
     }
-
   }
 
   list(callers = callers, i = i)
@@ -378,8 +377,8 @@ stack_subset <- function(stack_data, n) {
       # We'll add the global frame later
       n <- n <- n - 1
     } else if (n > n_stack + 1) {
-      stop("not that many frames on the stack", call. = FALSE)
-    }
+        stop("not that many frames on the stack", call. = FALSE)
+      }
     stack_data <- map(stack_data, `[`, seq_len(n))
   }
   stack_data
@@ -504,8 +503,8 @@ frame_position_global <- function(frame, stack = NULL) {
   if (is_frame(frame)) {
     return(frame$pos)
   } else if (is_integerish(frame)) {
-    return(frame)
-  }
+      return(frame)
+    }
 
   frame <- get_env(frame)
   stack <- stack %||% stack_trim(ctxt_stack(), n = 2)
@@ -523,7 +522,7 @@ frame_position_global <- function(frame, stack = NULL) {
 }
 
 frame_position_current <- function(frame, stack = NULL,
-                                   caller_pos = NULL) {
+  caller_pos = NULL) {
   if (is_integerish(frame)) {
     pos <- frame
   } else {

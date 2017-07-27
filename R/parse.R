@@ -56,8 +56,8 @@ parse_expr <- function(x) {
   if (n == 0) {
     abort("No expression to parse_expr")
   } else if (n > 1) {
-    abort("More than one expression parsed_expr")
-  }
+      abort("More than one expression parsed_expr")
+    }
 
   exprs[[1]]
 }
@@ -71,10 +71,10 @@ parse_exprs <- function(x) {
     }
     exprs <- parse(file = x)
   } else if (is_scalar_character(x)) {
-    exprs <- parse(text = x)
-  } else {
-    abort("`x` must be a string or a R connection")
-  }
+      exprs <- parse(text = x)
+    } else {
+      abort("`x` must be a string or a R connection")
+    }
   as.list(exprs)
 }
 

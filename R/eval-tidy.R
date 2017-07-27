@@ -230,10 +230,10 @@ as_overscope <- function(quo, data = NULL) {
   if (is_vector(data)) {
     bottom <- env_bury(bottom, !!! discard_unnamed(data))
   } else if (is_env(data)) {
-    bottom <- env_clone(data, parent = bottom)
-  } else if (!is_null(data)) {
-    abort("`data` must be a list or an environment")
-  }
+      bottom <- env_clone(data, parent = bottom)
+    } else if (!is_null(data)) {
+        abort("`data` must be a list or an environment")
+      }
 
   # Install data pronoun
   bottom$.data <- data_src
@@ -305,7 +305,7 @@ overscope_clean <- function(overscope) {
   # At this level we only want to remove what we have installed
   env_unbind(overscope, c("~", ".top_env", ".env"))
 
-  while(!identical(cur_env, env_parent(top_env))) {
+  while (!identical(cur_env, env_parent(top_env))) {
     env_unbind(cur_env, names(cur_env))
     cur_env <- env_parent(cur_env)
   }

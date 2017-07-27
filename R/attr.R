@@ -211,10 +211,10 @@ set_names <- function(x, nm = x, ...) {
     nm <- as_function(nm)
     nm <- nm(names2(x), ...)
   } else if (!is_null(nm)) {
-    # Make sure `x` is serialised when no arguments is provided.
-    nm <- as.character(nm)
-    nm <- chr(nm, ...)
-  }
+      # Make sure `x` is serialised when no arguments is provided.
+      nm <- as.character(nm)
+      nm <- chr(nm, ...)
+    }
 
   if (!is_null(nm) && !is_character(nm, length(x))) {
     abort("`nm` must be `NULL` or a character vector the same length as `x`")
