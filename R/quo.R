@@ -490,7 +490,7 @@ quo_splice <- function(x, parent = NULL, warn = FALSE) {
         quo_splice(node_car(x), x, warn = warn)
         x <- node_cdr(x)
       }
-  }  )
+  })
 
   x
 }

@@ -346,7 +346,7 @@ as_function <- function(x, env = caller_env()) {
     },
     string = {
       get(x, envir = env, mode = "function")
-  }  )
+  })
 }
 #' @rdname as_function
 #' @export
@@ -378,7 +378,7 @@ as_closure <- function(x, env = caller_env()) {
 
       prim_call <- lang(fn_name, splice(args))
       new_function(fmls, prim_call, base_env())
-  }  )
+  })
 }
 
 op_as_closure <- function(prim_nm) {
@@ -451,5 +451,5 @@ op_as_closure <- function(prim_nm) {
     `while` = {
       nm <- chr_quoted(prim_nm)
       abort(paste0("Can't coerce the primitive function ", nm, " to a closure"))
-  }  )
+  })
 }

@@ -104,7 +104,7 @@ dots_clean_empty <- function(dots, is_empty, ignore_empty) {
       },
       all = {
         dots <- discard(dots, is_empty)
-    }    )
+    })
   }
 
   dots

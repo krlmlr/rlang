@@ -197,7 +197,7 @@ as_env <- function(x, parent = NULL) {
     raw =,
     list = {
       as_env_(x, parent)
-  }  )
+  })
 }
 as_env_ <- function(x, parent = NULL) {
   stopifnot(is_dictionaryish(x))
